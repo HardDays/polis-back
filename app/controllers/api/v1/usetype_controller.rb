@@ -1,9 +1,9 @@
 module Api
   module V1
-    class CartypeController < ApplicationController
+    class UsetypeController < ApplicationController
 
       def list
-        render json: CarType.all.order('created_at ASC'), status: :ok
+        render json: CarUsetype.all.order('created_at ASC'), status: :ok
       end
 
       def show
@@ -13,10 +13,9 @@ module Api
 
       private
       def set_type
-        @model = CarType.find(params[:id])
+        @model = CarUsetype.find(params[:id])
       end
 
     end
   end
 end
-
