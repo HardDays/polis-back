@@ -4,17 +4,17 @@ module CalculationHelper
     response = RestClient.post Helper.api_url.to_s,
                                    {
                                       :vehicle          => {
-                                                                :type         =>  params[:type],
-                                                                :power        =>  params[:power],
-                                                                :year         =>  params[:year]
+                                                                :type         =>  params[:type].to_i,
+                                                                :power        =>  params[:power].to_i,
+                                                                :year         =>  params[:year].to_i
                                                             },
-                                     :multidrive         =>  params[:multidrive],
-                                     :exactCalculation   =>  params[:exactCalculation],
+                                     :multidrive         =>  params[:multidrive].to_i,
+                                     :exactCalculation   =>  params[:exactCalculation].to_i,
                                      :drivers            =>  params[:drivers],
                                      :owner              =>  {
-                                                              :city  =>  params[:city]
+                                                              :city  =>  params[:city].to_s
                                                             },
-                                     :usePeriod         =>  params[:usePeriod]
+                                     :usePeriod         =>  params[:usePeriod].to_i
                                    }.to_json,
                                    {
                                        'Authorization':Helper.getINGURUToken.to_s,
