@@ -3,17 +3,19 @@ module CalculationHelper
   def self.prev_calculate(params)
     response = RestClient.post Helper.api_url.to_s,
                                    {
-                                      :vehicle          => {
-                                                                :type         =>  params[:type],
-                                                                :power        =>  params[:power],
-                                                                :year         =>  params[:year]
-                                                            },
+                                      :vehicle          => params[:vehicle],
+                                      # {
+                                      #                           :type         =>  params[:type],
+                                      #                           :power        =>  params[:power],
+                                      #                           :year         =>  params[:year]
+                                      #                       },
                                      :multidrive         =>  params[:multidrive],
                                      :exactCalculation   =>  params[:exactCalculation],
                                      :drivers            =>  params[:drivers],
-                                     :owner              =>  {
-                                                              :city  =>  params[:city]
-                                                            },
+                                     :owner              =>  params[:owner]
+                                    #  {
+                                    #                           :city  =>  params[:city]
+                                    #                         },
                                      :usePeriod         =>  params[:usePeriod]
                                    }.to_json,
                                    {
