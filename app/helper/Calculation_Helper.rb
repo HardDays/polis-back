@@ -12,7 +12,7 @@ module CalculationHelper
                                      :multidrive         =>  params[:multidrive],
                                      :exactCalculation   =>  params[:exactCalculation],
                                      :drivers            =>  params[:drivers],
-                                     :owner              =>  params[:owner]
+                                     :owner              =>  params[:owner],
                                     #  {
                                     #                           :city  =>  params[:city]
                                     #                         },
