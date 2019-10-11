@@ -4,15 +4,15 @@ module CalculationHelper
     response = RestClient.post Helper.api_url.to_s,
                                    {
                                       :vehicle          => {
-                                                                :type         =>  params[:type].to_i,
-                                                                :power        =>  params[:power].to_i,
-                                                                :year         =>  params[:year].to_i
+                                                                :type         =>  (params[:type]).to_i,
+                                                                :power        =>  (params[:power]).to_i,
+                                                                :year         =>  (params[:year]).to_i
                                                             },
-                                     :multidrive         =>  params[:multidrive].to_i,
-                                     :exactCalculation   =>  params[:exactCalculation].to_i,
+                                     :multidrive         =>  (params[:multidrive]).to_i,
+                                     :exactCalculation   =>  (params[:exactCalculation]).to_i,
                                      :drivers            =>  params[:drivers],
                                      :owner              =>  {
-                                                              :city  =>  params[:city].to_s
+                                                              :city  =>  (params[:city]).to_s
                                                             },
                                      :usePeriod         =>  params[:usePeriod].to_i
                                    }.to_json,
