@@ -8,9 +8,6 @@ Rails.application.routes.draw do
       # Пока просто выгрузка в таблицы
       get 'cars/update', action: :update_cars, controller: 'application'
 
-
-      get 'regions', action: :regions, controller: 'application'
-
       post 'cars', action: :list, controller: 'cars'
       get 'cars/brand', action: :brands, controller: 'cars'
       get 'cars/brand/:id', action: :brand, controller: 'cars'
@@ -28,6 +25,15 @@ Rails.application.routes.draw do
 
       post 'calculate/lite', action: :first_calc, controller: 'calculation'
       post 'calculate/full', action: :full_calc, controller: 'calculation'
+
+      get 'pay/link/:eId', action: :pay_link, controller: 'pay'
+      get 'pay/status/:eId', action: :pay_status, controller: 'pay'
+
+      get 'polis/:eId', action: :polis_document, controller: 'application'
+
+      get 'regions/', action: :regions, controller: 'application'
+      get 'regions/:regId', action: :regions, controller: 'application'
+      get 'regions/:regId/:distId', action: :regions, controller: 'application'
 
     end
   end
