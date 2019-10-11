@@ -22,9 +22,9 @@ module Api
 
       def list
         if  cars_params[:title]
-         data = CarBrand.left_outer_joins(:car_models).select("CONCAT_WS(' ', car_brands.title,car_models.title) AS full_title").where(" upper(CONCAT_WS(' ', car_brands.title,car_models.title)) LIKE upper('%#{cars_params[:title]}%') ").order('car_brands.id').group('car_brands.id','car_models.title', 'car_brands.title').limit(cars_params[:limit]).offset(cars_params[:offset])
+         data = CarBrand.left_outer_joins(:car_models).select("CONCAT_WS(' ', car_brands.title,car_models.title) AS full_title, car_brands.title AS brand, car_models.title AS model").where(" upper(CONCAT_WS(' ', car_brands.title,car_models.title)) LIKE upper('%#{cars_params[:title]}%') ").order('car_brands.id').group('car_brands.id','car_models.title', 'car_brands.title').limit(cars_params[:limit]).offset(cars_params[:offset])
         else
-          data = CarBrand.left_outer_joins(:car_models).select("CONCAT_WS(' ', car_brands.title,car_models.title) AS full_title").order('car_brands.id').group('car_brands.id','car_models.title', 'car_brands.title').limit(cars_params[:limit]).offset(cars_params[:offset])
+          data = CarBrand.left_outer_joins(:car_models).select("CONCAT_WS(' ', car_brands.title,car_models.title) AS full_title, car_brands.title AS brand, car_models.title AS model").order('car_brands.id').group('car_brands.id','car_models.title', 'car_brands.title').limit(cars_params[:limit]).offset(cars_params[:offset])
         end
         render json: data, status: :ok
       end
