@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lastname: MyString
+  firstname: MyString
+  middlename: MyString
+  birthdate: 2019-10-14
+  passport_serial: MyString
+  passport_number: MyString
+  passport_date: 2019-10-14
+  passport_foreign: 1
+  name: MyString
+  inn: MyString
+  document_serial: MyString
+  document_number: MyString
+  city_id: 1
+  street: MyString
+  house: MyString
+  apartment: MyString
+  fullkladr: MyString
+  zip: MyString
+  name: MyString
+  phone: MyString
+  email: MyString
+
+two:
+  lastname: MyString
+  firstname: MyString
+  middlename: MyString
+  birthdate: 2019-10-14
+  passport_serial: MyString
+  passport_number: MyString
+  passport_date: 2019-10-14
+  passport_foreign: 1
+  name: MyString
+  inn: MyString
+  document_serial: MyString
+  document_number: MyString
+  city_id: 1
+  street: MyString
+  house: MyString
+  apartment: MyString
+  fullkladr: MyString
+  zip: MyString
+  name: MyString
+  phone: MyString
+  email: MyString
