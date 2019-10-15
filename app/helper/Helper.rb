@@ -14,4 +14,13 @@ module Helper
     return 'https://api.inguru.ru/eosago/4.0'
   end
 
+  def self.getWidgetToken
+      response = RestClient.post self.api_widget_url.to_s+'/users/b2c-login', nil, {'Accept':'application/json, text/plain', 'B2C-DOMAIN':'widget.agentapp.ru'}
+      return 'Token ' + JSON.parse(response.body)['token']
+  end
+
+  def self.api_widget_url
+    return 'https://widget.agentapp.ru/widgets/v1'
+  end
+
 end

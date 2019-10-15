@@ -9,6 +9,6 @@ class Car < ApplicationRecord
    has_one :insurer
    has_many :drivers
 
-   validates :car_type_id, :car_brand_id, :car_model_id, :owner_id, :power, :year
+   # validates :car_type_id, :car_brand_id, :car_model_id, :owner_id, :power, :year, :body_number, :vin
 
 end

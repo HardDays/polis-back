@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get 'cars/brand/:id', action: :brand, controller: 'cars'
       get 'cars/model', action: :models, controller: 'cars'
       get 'cars/model/:id', action: :model, controller: 'cars'
+      post 'cars/by_number_plate', action: :car_search, controller: 'cars'
+      post 'cars/ticket_check', action: :check_ticket, controller: 'cars'
 
       get 'insurance', action: :list, controller: 'insurance'
       get 'insurance/:id', action: :show, controller: 'insurance'

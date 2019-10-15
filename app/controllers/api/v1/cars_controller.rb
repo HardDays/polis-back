@@ -29,7 +29,19 @@ module Api
         render json: data, status: :ok
       end
 
-      private
+      def car_search
+         render json: CarHelper.find_car_by_numberplate(cars_params), status: :ok
+      end
+
+      def check_ticket
+          if %w(VIN BodyNumber ChassisNumber LicensePlate).include? cars_params[:ident_type]
+            render json: CarHelper.check_ticket(cars_params), status: :ok
+          else
+            render json: {message:'Не изветный параметр запроса: <ident_type>', description:'Необходим один из ["VIN", "BodyNumber", "ChassisNumber", "LicensePlate"]'}, status: :not_found
+          end
+      end
+
+    private
       def set_model
         @model = CarModel.find(params[:id])
       end
@@ -39,7 +51,7 @@ module Api
       end
 
       def cars_params
-         params.permit(:title, :limit, :offset)
+         params.permit(:title, :limit, :offset, :number_plate, :ident_type, :ident_number)
       end
 
     end
