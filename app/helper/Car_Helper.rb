@@ -24,7 +24,7 @@ module CarHelper
   end
 
   def self.check_ticket(params)
-      response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'ident_type':params['ident_type'].to_s, 'ident_number':params['ident_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':Helper.getWidgetToken}
+      response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/ticket_check', {'ident_type':params['ident_type'].to_s, 'ident_number':params['ident_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':Helper.getWidgetToken}
       return response.body
   end
 
