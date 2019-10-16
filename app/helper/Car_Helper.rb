@@ -23,8 +23,8 @@ module CarHelper
       response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'number_plate':params['number_plate'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':Helper.getWidgetToken}
       result = JSON.parse(response.body)
       if result.vin_number
-        result.dc = this.check_ticket({'ident_type':"VIN", "ident_number": result.vin_number})
-      return result
+        result.dc = JSON.parse(this.check_ticket({'ident_type':"VIN", "ident_number": result.vin_number}))
+      return JSON.stringify(result)
   end
 
   def self.check_ticket(params)
