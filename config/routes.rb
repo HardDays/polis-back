@@ -33,9 +33,13 @@ Rails.application.routes.draw do
 
       get 'polis/:eId', action: :polis_document, controller: 'application'
 
-      get 'regions/', action: :regions, controller: 'application'
-      get 'regions/:regId', action: :regions, controller: 'application'
-      get 'regions/:regId/:distId', action: :regions, controller: 'application'
+      #get 'regions/', action: :regions, controller: 'application'
+      #get 'regions/:regId', action: :regions, controller: 'application'
+      #get 'regions/:regId/:distId', action: :regions, controller: 'application'
+
+      get 'regions/kladr', action: :kladr, controller: 'application'
+      get 'regions/addr', action: :addr, controller: 'application'
+      get 'regions/ufms', action: :ufms, controller: 'application'
 
     end
   end

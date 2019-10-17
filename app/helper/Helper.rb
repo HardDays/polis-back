@@ -23,4 +23,12 @@ module Helper
     return 'https://widget.agentapp.ru/widgets/v1'
   end
 
+  def self.dadata_url
+    return 'https://dadata.ru/api/v2/suggest/address'
+  end
+
+  def self.dadata_token
+    return 'Token 42f86217e754ff52c35eb5175e36bac5b5c99b07'
+  end
+
 end

@@ -19,13 +19,14 @@ module CarHelper
   end
 
   def self.find_car_by_numberplate(params)
-      # token = Helper.getWidgetToken
-      response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'number_plate':params['number_plate'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':Helper.getWidgetToken}
-      return response.body
+      token = Helper.getWidgetToken
+      response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'number_plate':params['number_plate'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
       result = JSON.parse(response.body)
-      if result.vin_number
-        result.dc = JSON.parse(this.check_ticket({'ident_type':"VIN", "ident_number": result.vin_number}))
-      return JSON.stringify(result)
+      if result['vin_number']
+        resp = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/ticket_check', {'ident_type':'VIN', 'ident_number':result['vin_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
+        result['dc'] = JSON.parse(resp.body)
+      end
+      return result
   end
 
   def self.check_ticket(params)
