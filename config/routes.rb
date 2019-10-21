@@ -41,6 +41,9 @@ Rails.application.routes.draw do
       get 'regions/addr', action: :addr, controller: 'application'
       get 'regions/ufms', action: :ufms, controller: 'application'
 
+      post 'twilio/verify', action: :verify, controller: 'twilio'
+      post 'twilio/check', action: :check, controller: 'twilio'
+
     end
   end
 

@@ -87,7 +87,7 @@ module CalculationHelper
   end
 
   def self.pay_status(params)
-    response = RestClient.get Helper.api_url.to_s,{'Authorization':Helper.getINGURUToken.to_s, 'Content-Type':'application/json', params:{q:'payment', eId:params[:eId]}}
+    response = RestClient.get Helper.api_url.to_s,{'Authorization':Helper.getINGURUToken.to_s, 'Content-Type':'application/json', params:{q:'payment', eId:params[:eId]}} 
     return response.body
   end
 
