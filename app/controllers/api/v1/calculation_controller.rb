@@ -7,7 +7,14 @@ module Api
       end
 
       def full_calc
-        render json: CalculationHelper.full_calculate(params) , status: :ok
+        # render json: params[:insurerIsOwner] , status: :ok
+        SaverHelper.save_full_calculation_data(params)
+        # if params[:insurerIsOwner].to_i == 1
+        #   render json: CalculationHelper.full_calculate(params) , status: :ok
+        # else
+        #   render json: CalculationHelper.full_calculate_vs_ins(params) , status: :ok
+        # end
+
       end
 
       private

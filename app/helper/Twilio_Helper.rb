@@ -9,6 +9,12 @@ module TwilioHelper
             .verifications
             .create(to: params['phone'].to_s, channel: 'sms')
 
+        insurer = Insurer.where(phone:params['phone'].to_s).take
+        if !insurer.nil?
+            insurer = Insurer.new(phone:params['phone'].to_s)
+            insurer.save
+        end
+
         return {
            :sid => verification.sid,
            :to => verification.to,

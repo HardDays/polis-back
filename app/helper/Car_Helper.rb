@@ -25,6 +25,7 @@ module CarHelper
       if result['vin_number']
         resp = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/ticket_check', {'ident_type':'VIN', 'ident_number':result['vin_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
         result['dc'] = JSON.parse(resp.body)
+       SaverHelper.save_car_from_numberplate_find(result)
       end
       return result
   end
@@ -33,6 +34,5 @@ module CarHelper
       response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/ticket_check', {'ident_type':params['ident_type'].to_s, 'ident_number':params['ident_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':Helper.getWidgetToken}
       return response.body
   end
-
 
 end
