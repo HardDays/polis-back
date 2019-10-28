@@ -39,50 +39,49 @@ module SaverHelper
 
   end
 
-  def self.save_full_calculation_data(params)
-    index = 'insurer'
-    if params[:insurerIsOwner].to_i == 1
-      index = 'owner'
-    end
+  # def self.save_full_calculation_data(params)
+  #   index = 'insurer'
+  #   if params[:insurerIsOwner].to_i == 1
+  #     index = 'owner'
+  #   end
+  #
+  #   @owner = Owner.where(inn:params[:owner]['inn'].to_s).or(Owner.where(passportSerial:params[:owner]['passportSerial'].to_s, passportNumber:params[:owner]['passportNumber'].to_s)).take
+  #   @insurer = Insurer.where(inn:params[index]['inn'].to_s).or(Insurer.where(passportSerial:params[index]['passportSerial'].to_s, passportNumber:params[index]['passportNumber'].to_s)).take
+  #   @car = Car.where(number_plate:params['licensePlate'].to_s).or(Car.where(vin:params['vehicle']['vin'].to_s)).take
+  #
+  #   save_owner(params)
+  #   save_insurer(params)
+  #   save_car_from_calculation(params)
+  # end
 
-    @owner = Owner.where(inn:params[:owner]['inn'].to_s).or(Owner.where(passport_serial:params[:owner]['passportSerial'].to_s, passport_number:params[:owner]['passportNumber'].to_s)).take
-    @insurer = Insurer.where(inn:params[index]['inn'].to_s).or(Insurer.where(passport_serial:params[:owner]['passportSerial'].to_s, passport_number:params[:owner]['passportNumber'].to_s)).take
-    @car = Car.where(number_plate:params['licensePlate'].to_s).or(Car.where(vin:params['vehicle']['vin'].to_s)).take
-
-    save_owner(params)
-    save_insurer(params)
-    save_car_from_calculation(params)
-  end
-
-  def self.save_owner(params)
-    if params[:owner]
-      if @owner
-        @owner.update(params[:owner])
+  def self.save_owner(params, owner)
+    if params
+      if owner
+        owner.update(params)
       else
-        @owner = Owner.new(params[:owner])
+        owner = Owner.new(params)
       end
-      @owner.save
+      owner.save
+      return owner
     end
   end
 
-  def self.save_insurer(params)
-    index = 'insurer'
-    if params[:insurerIsOwner].to_i == 1
-      index = 'owner'
-    end
+  def self.save_insurer(params, insurer)
+
     # get_insurer(params[index]['inn'],params[index]['passportSerial'], params[index]['passportNumber'] )
-    if params[index]
-      if @insurer
-        @insurer.update(params[index])
+    if params
+      if insurer
+        insurer.update(params)
       else
-        @insurer = Insurer.new(params[index])
+        insurer = Insurer.new(params)
       end
-      @insurer.save
+      insurer.save
+      return insurer
     end
 
   end
 
-  def self.save_car_from_calculation(params)
+  def self.save_car_from_calculation(params, car, insurer, owner)
     # get_car( params['vehicle']['vin'], params['licensePlate'])
 
     car_params = {}
@@ -100,8 +99,8 @@ module SaverHelper
     car_params['use_trailer'] = params['useTrailer'].to_i
     car_params['registered_abroad'] = params['registeredAbroad'].to_i
     car_params['registration_way'] = params['registrationWay'].to_i
-    car_params['owner_id'] = @owner.id
-    car_params['insurers_id'] = @insurer.id
+    car_params['owner_id'] = owner.id
+    car_params['insurers_id'] = insurer.id
 
     car_brand_id = CarBrand.where(title:params['vehicle']['brand'].to_s.upcase).take
     if car_brand_id
@@ -118,26 +117,41 @@ module SaverHelper
       car_params['dc_date'] = params['dc']['next_to']
     end
 
-    if @car
-      @car.update(car_params)
+    if car
+      car.update(car_params)
     else
-      @car = Car.new(car_params)
+      car = Car.new(car_params)
     end
 
-    @car.save
+    car.save
+    return  car
   end
 
+  def self.save_drivers(drivers_list, car)
+    drivers_list.each do |driver|
+      driver_params = {}
+      driver_params['car_id'] = car[:id]
+      driver_params['lastname'] = driver['lastname']
+      driver_params['firstname'] = driver['firstname']
+      driver_params['middlename'] = driver['middlename']
+      driver_params['birthdate'] = driver['birthdate']
+      driver_params['expdate'] = driver['expdate']
+      driver_params['licenseSerial'] = driver['licenseSerial']
+      driver_params['licenseNumber'] = driver['licenseNumber']
+      driver_params['licenseDate'] = driver['licenseDate']
 
-  def get_car(vin, number)
-    @car = Car.where(number_plate:number.to_s).or(Car.where(vin:vin.to_s)).take
-  end
 
-  def get_owner(inn, passport_ser, passport_num)
-    @owner = Owner.where(inn:inn.to_s).or(Owner.where(passport_serial:passport_ser.to_s).and(Owner.where(passport_number:passport_num.to_s))).take
-  end
+      _driver = Driver.where(licenseSerial:driver['licenseSerial'].to_s,
+                             licenseNumber:driver['licenseNumber'].to_s,
+                             car_id:car[:id]).take
 
-  def get_insurer(inn, passport_ser, passport_num)
-    @insurer = Insurer.where(inn:inn.to_s).or(Insurer.where(passport_serial:passport_ser.to_s).and(Insurer.where(passport_number:passport_num.to_s))).take
+      if _driver
+        _driver.update(driver_params)
+      else
+        _driver = Driver.new(driver_params)
+      end
+      _driver.save
+    end
   end
 
 end
