@@ -82,6 +82,5 @@ test:
 #
 production:
   <<: *default
-  database: insurance_production
-  username: insurance
-  password: <%= ENV['INSURANCE_DATABASE_PASSWORD'] %>
+  database: insurance
+

@@ -32,9 +32,7 @@ module SaverHelper
     if @car
       @car.update(car_params)
     else
-      @car = Car.new(
-          car_params
-      )
+      @car = Car.new(car_params)
     end
 
     @car.save
@@ -57,33 +55,14 @@ module SaverHelper
   end
 
   def self.save_owner(params)
-
     if params[:owner]
-      owner_params = {}
-      owner_params['lastname'] = params[:owner]['lastname']
-      owner_params['firstname'] = params[:owner]['firstname']
-      owner_params['middlename'] = params[:owner]['middlename']
-      owner_params['birthdate'] = params[:owner]['birthdate']
-      owner_params['passport_serial'] = params[:owner]['passportSerial']
-      owner_params['passport_number'] = params[:owner]['passportNumber']
-      owner_params['name'] = params[:owner]['name']
-      owner_params['inn'] = params[:owner]['inn']
-      owner_params['city_id'] = params[:owner]['city_id']
-      owner_params['street'] = params[:owner]['street']
-      owner_params['house'] = params[:owner]['house']
-      owner_params['apartment'] = params[:owner]['apartment']
-      owner_params['zip'] = params[:owner]['zip']
-      owner_params['fullkladr'] = params[:owner]['fullkladr']
+      if @owner
+        @owner.update(params[:owner])
+      else
+        @owner = Owner.new(params[:owner])
+      end
+      @owner.save
     end
-
-    if @owner
-      @owner.update(owner_params)
-    else
-      @owner = Owner.new(owner_params)
-    end
-
-    @owner.save
-
   end
 
   def self.save_insurer(params)
@@ -92,30 +71,15 @@ module SaverHelper
       index = 'owner'
     end
     # get_insurer(params[index]['inn'],params[index]['passportSerial'], params[index]['passportNumber'] )
-    if params[:owner]
-      insurer_params = {}
-      insurer_params['lastname'] = params[index]['lastname']
-      insurer_params['firstname'] = params[index]['firstname']
-      insurer_params['middlename'] = params[index]['middlename']
-      insurer_params['birthdate'] = params[index]['birthdate']
-      insurer_params['passport_serial'] = params[index]['passportSerial']
-      insurer_params['passport_number'] = params[index]['passportNumber']
-      insurer_params['name'] = params[index]['name']
-      insurer_params['inn'] = params[index]['inn']
-      insurer_params['city_id'] = params[index]['city_id']
-      insurer_params['street'] = params[index]['street']
-      insurer_params['house'] = params[index]['house']
-      insurer_params['apartment'] = params[index]['apartment']
-      insurer_params['zip'] = params[index]['zip']
-      insurer_params['fullkladr'] = params[index]['fullkladr']
-    end
-    if @insurer
-      @insurer.update(insurer_params)
-    else
-      @insurer = Insurer.new(insurer_params)
+    if params[index]
+      if @insurer
+        @insurer.update(params[index])
+      else
+        @insurer = Insurer.new(params[index])
+      end
+      @insurer.save
     end
 
-    @insurer.save
   end
 
   def self.save_car_from_calculation(params)

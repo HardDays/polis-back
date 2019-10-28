@@ -179,7 +179,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
-    wdm (0.1.1)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -202,7 +201,6 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   twilio-ruby
   tzinfo-data
-  wdm (>= 0.1.0)
 
 RUBY VERSION
    ruby 2.6.3p62
