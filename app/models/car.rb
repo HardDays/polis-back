@@ -1,9 +1,9 @@
 class Car < ApplicationRecord
 
-   belongs_to :car_brand
-   belongs_to :car_model
-   belongs_to :car_type
-   belongs_to :car_usetype
+   # belongs_to :car_brand
+   # belongs_to :car_model
+   # belongs_to :car_type
+   # belongs_to :car_usetype
 
    has_one :owner
    has_one :insurer

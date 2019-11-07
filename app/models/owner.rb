@@ -1,7 +1,7 @@
 class Owner < ApplicationRecord
 
-  belongs_to :car
+  # belongs_to :car
 
-  validate :city_id
+  # validate :city_id
 
 end

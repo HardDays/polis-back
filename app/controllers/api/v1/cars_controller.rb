@@ -30,6 +30,7 @@ module Api
       end
 
       def car_search
+         # render json:CarType.where(label:params[:car_mark]).take[:id], status: :ok
          render json: CarHelper.find_car_by_numberplate(cars_params), status: :ok
       end
 
