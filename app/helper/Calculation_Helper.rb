@@ -17,23 +17,8 @@ module CalculationHelper
     result = {}
     result[:calculations] = JSON.parse(response.body)
 
-    # data = {}
-    
-    # if params[:vehicle]
-    #   data[:vehicle] = SaverHelper.save_car params[:vehicle]
-    # end
-
-    # if params[:owner]
-    #   data[:owner] = SaverHelper.save_owner(params[:owner])
-    # end
-
-    # if params[:insurer]
-    #   data[:insurer] = SaverHelper.save_insurer(params[:insurer])
-    # end
-
     
     result[:data] = SaverHelper.save_full_agreement(params)
-    #data = AgreementHelper.save_agreement(data)
 
     return result
   end

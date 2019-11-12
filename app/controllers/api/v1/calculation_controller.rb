@@ -14,6 +14,30 @@ module Api
         render json: CalculationHelper.prev_calculate(params) , status: :ok
       end
 
+      def get_offer
+        params.require(:sk)
+
+        sk = params[:sk]
+        aggr = params["agreement"]
+        # render json: aggr["vehicle"] , status: :ok
+        body = {};
+        body[:sk] = [sk.to_i]
+        aggr.each do |attr_name, attr_value|
+          body[attr_name] = attr_value
+        end
+        # render json: body , status: :ok
+        response = RestClient::Request.execute(method: :post,
+          url:  Helper.api_url.to_s,
+          payload: body.to_json,
+          headers: {
+              'Authorization': Helper.getINGURUToken.to_s,
+              'Content-Type':'application/json'
+                 },
+          timeout: 120)
+        render json: response.body , status: :ok
+
+      end
+
       def full_calc
 
         get_insurer

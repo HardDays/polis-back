@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
       post 'calculate/lite', action: :first_calc, controller: 'calculation'
       post 'calculate/full', action: :full_calc, controller: 'calculation'
+      post 'calculate/offer/:sk', action: :get_offer, controller: 'calculation'
       post 'calculate/save', action: :save_agr, controller: 'calculation'
       get 'calculate', action: :get_saved_agreement, controller: 'calculation'
 
