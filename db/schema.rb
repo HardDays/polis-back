@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_152319) do
+ActiveRecord::Schema.define(version: 2019_11_12_035808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agreements", force: :cascade do |t|
+    t.string "access_id"
+    t.string "access_code"
+    t.integer "car_id"
+    t.integer "multidrive"
+    t.integer "owner_id"
+    t.integer "insurerIsOwner"
+    t.integer "insurer_id"
+    t.string "purpose", default: "personal"
+    t.integer "registeredAbroad", default: 0
+    t.integer "registrationWay", default: 0
+    t.integer "useTrailer", default: 0
+    t.integer "violations", default: 0
+    t.date "date"
+    t.integer "usePeriod", default: 12
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "licensePlate"
+  end
+
+  create_table "agreements_tables", force: :cascade do |t|
+  end
 
   create_table "car_brands", force: :cascade do |t|
     t.string "title"
@@ -42,35 +68,23 @@ ActiveRecord::Schema.define(version: 2019_10_22_152319) do
   end
 
   create_table "cars", force: :cascade do |t|
-    t.integer "car_type_id"
-    t.integer "car_brand_id"
-    t.integer "car_model_id"
-    t.integer "power"
+    t.integer "type", default: 1, null: false
+    t.integer "power", null: false
+    t.integer "year", null: false
     t.string "vin"
-    t.integer "year"
-    t.string "body_number"
-    t.string "chassis_number"
-    t.integer "wight"
-    t.integer "max_wight"
-    t.integer "seats"
-    t.integer "document_type"
-    t.string "document_serial"
-    t.string "document_number"
-    t.date "document_date"
+    t.string "bodyNum"
+    t.string "chassisNum"
+    t.integer "docType", default: 1, null: false
+    t.string "docSerial"
+    t.string "docNumber"
+    t.datetime "docDate"
+    t.string "brand", null: false
+    t.string "model", null: false
     t.string "dc"
-    t.date "dc_date"
-    t.date "dc_issue_date"
-    t.integer "owner_id"
-    t.integer "car_usetype_id"
-    t.integer "registered_abroad"
-    t.integer "registration_way"
-    t.integer "use_trailer"
-    t.string "prev_policy_serial"
-    t.string "prev_policy_number"
-    t.integer "insurers_id"
+    t.datetime "dcDate"
+    t.datetime "dcIssueDate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "number_plate"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -79,11 +93,14 @@ ActiveRecord::Schema.define(version: 2019_10_22_152319) do
     t.string "middlename"
     t.date "birthdate"
     t.date "expdate"
-    t.string "license_serial"
-    t.string "license_number"
-    t.date "license_date"
-    t.integer "license_foreign"
-    t.integer "car_id"
+    t.string "licenseSerial"
+    t.string "licenseNumber"
+    t.date "licenseDate"
+    t.integer "licenseForeign"
+    t.integer "agreement_id", null: false
+    t.string "prevLicenseSerial"
+    t.string "prevLicenseNumber"
+    t.date "prevLicenseDate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -99,22 +116,17 @@ ActiveRecord::Schema.define(version: 2019_10_22_152319) do
     t.string "firstname"
     t.string "middlename"
     t.date "birthdate"
-    t.string "passport_serial"
-    t.string "passport_number"
-    t.date "passport_date"
-    t.integer "passport_foreign"
-    t.string "name"
-    t.string "inn"
-    t.string "document_serial"
-    t.string "document_number"
-    t.integer "city_id"
+    t.string "passportSerial"
+    t.string "passportNumber"
+    t.date "passportDate"
+    t.integer "passportForeign", default: 0
+    t.string "city"
     t.string "street"
     t.string "house"
     t.string "apartment"
     t.string "fullkladr"
     t.string "zip"
-    t.string "phone"
-    t.string "email"
+    t.string "fullAddress"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -124,20 +136,17 @@ ActiveRecord::Schema.define(version: 2019_10_22_152319) do
     t.string "firstname"
     t.string "middlename"
     t.date "birthdate"
-    t.string "passport_serial"
-    t.string "passport_number"
-    t.date "passport_date"
-    t.integer "passport_foreign"
-    t.string "name"
-    t.string "inn"
-    t.string "document_serial"
-    t.string "document_number"
-    t.integer "city_id"
+    t.string "passportSerial"
+    t.string "passportNumber"
+    t.date "passportDate"
+    t.integer "passportForeign", default: 0
+    t.string "city"
     t.string "street"
     t.string "house"
     t.string "apartment"
     t.string "fullkladr"
     t.string "zip"
+    t.string "fullAddress"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

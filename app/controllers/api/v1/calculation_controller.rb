@@ -1,6 +1,14 @@
 module Api
   module V1
     class CalculationController < ApplicationController
+      def get_saved_agreement
+        params.require(:access_code)
+        params.require(:access_id)
+        render json: SaverHelper.get_full_agreement(params) , status: :ok
+      end
+      def save_agr
+        render json: SaverHelper.save_full_agreement(params), status: :ok
+      end
 
       def first_calc
         render json: CalculationHelper.prev_calculate(params) , status: :ok
@@ -52,7 +60,7 @@ module Api
       end
 
       def get_car
-        @car = Car.where(number_plate:params['licensePlate'].to_s).or(Car.where(vin:params['vehicle']['vin'].to_s)).take
+        @car = Car.where(Car.where(vin:params[:vin].to_s)).take
       end
 
       def get_owner
@@ -67,6 +75,7 @@ module Api
         @insurer = Insurer.where(inn:params[index]['inn'].to_s).or(Insurer.where(passportSerial:params[index]['passportSerial'].to_s, passportNumber:params[index]['passportNumber'].to_s)).take
       end
 
+      
     end
   end
 end
