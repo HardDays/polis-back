@@ -19,8 +19,8 @@ module CarHelper
   end
 
   def self.find_car_by_numberplate(params)
-      #token = Helper.getWidgetToken
-      token = 'Token afdd5a46a8b02eb8242997711a614dec91ea09af'
+      token = Helper.getWidgetToken
+      #token = 'Token afdd5a46a8b02eb8242997711a614dec91ea09af'
       response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'number_plate':params['number_plate'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
       # if response.status.to_i != 200 && response.status.to_i != 201
       #  return response
