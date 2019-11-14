@@ -16,7 +16,7 @@ module SaverHelper
 
     
     result = SaverHelper.save_agreement(params, {
-      :vehicle => @vehiclie,
+      :vehicle => @vehicle,
       :owner => @owner,
       :insurer => @insurer
     },params[:drivers])

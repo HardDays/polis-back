@@ -25,6 +25,7 @@ module CarHelper
       # if response.status.to_i != 200 && response.status.to_i != 201
       #  return response
       # end
+      #return response.body
 
       result = JSON.parse(response.body)
       
