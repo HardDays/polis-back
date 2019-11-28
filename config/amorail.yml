@@ -1,0 +1,8 @@
+development:
+  amorail:
+    usermail: 'mm@goodluck-club.ru'
+    api_key: '2f9ec387539d0e3c1a83bd0759c0ea3b824957dd'
+    api_endpoint: 'https://goodluckclub.amocrm.ru:443'
+    api_path: '/private/api/v1/json'
+    auth_url: '/private/api/auth.php?type=json'
+    

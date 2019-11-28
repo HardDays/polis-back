@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -24,6 +24,10 @@ gem 'spring'
 gem 'faker'
 gem 'rest-client'
 gem 'spring-watcher-listen', '~> 2.0.0'
+
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'amorail', '~> 0.6.0'
 
 gem 'twilio-ruby'
 

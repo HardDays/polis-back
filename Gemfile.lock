@@ -56,6 +56,13 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
+    amorail (0.6.0)
+      activemodel
+      anyway_config (>= 1.0)
+      faraday
+      faraday_middleware
+      json
+    anyway_config (1.4.4)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -69,6 +76,8 @@ GEM
       i18n (>= 1.6, < 1.8)
     faraday (0.17.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.13.1)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.11.1)
     ffi (1.11.1-x64-mingw32)
     globalid (0.4.2)
@@ -78,6 +87,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
+    json (2.1.0)
     jwt (2.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -179,6 +189,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
+    wdm (0.1.1)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -189,9 +200,12 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  amorail (~> 0.6.0)
   bootsnap (>= 1.4.2)
   byebug
   faker
+  faraday
+  faraday_middleware
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
@@ -201,9 +215,10 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   twilio-ruby
   tzinfo-data
+  wdm (>= 0.1.0)
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.6.5p114
 
 BUNDLED WITH
    2.0.2

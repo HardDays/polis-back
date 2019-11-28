@@ -68,8 +68,12 @@ module Api
         {
           'Authorization':Helper.dadata_token.to_s,
           'Content-Type':'application/json'
-      }
-      render json: JSON.parse(response.body)["suggestions"], status: :ok
+        }
+        render json: JSON.parse(response.body)["suggestions"], status: :ok
+      end
+
+      def amo
+        render json: AmoHelper.test2(params), status: :ok
       end
 
       private

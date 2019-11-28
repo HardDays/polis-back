@@ -265,8 +265,8 @@ def self.get_full_agreement(params)
       result[:owner] = Owner.find result["owner_id"]
     end
 
-    if result["insurer"]
-      result[:insurer] = Insurer.find result["insurer"]
+    if result["insurer_id"]
+      result[:insurer] = Insurer.find result["insurer_id"]
     end
 
     result[:drivers] = Driver.where(agreement_id: aggr["id"])

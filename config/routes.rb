@@ -47,6 +47,9 @@ Rails.application.routes.draw do
       post 'twilio/verify', action: :verify, controller: 'twilio'
       post 'twilio/check', action: :check, controller: 'twilio'
 
+
+      get 'amo/test', action: :amo, controller: 'application'
+
     end
   end
 
