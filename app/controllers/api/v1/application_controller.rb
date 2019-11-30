@@ -42,7 +42,10 @@ module Api
       def addr_by_kladr
         response = RestClient.post Helper.dadata_url_for_city.to_s,
         {
-          :query => params[:query]
+          :query => params[:query],
+          :to_bound => {
+            :value => "settlement"
+          }
         }.to_json,
         {
             'Authorization':Helper.dadata_token.to_s,
