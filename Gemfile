@@ -30,6 +30,7 @@ gem 'faraday_middleware'
 gem 'amorail', '~> 0.6.0'
 
 gem 'twilio-ruby'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 # Use Active Storage variant
