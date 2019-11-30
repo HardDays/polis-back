@@ -252,6 +252,7 @@ def self.get_agreement_model(params)
   result[:name] = params["name"]
   result[:phone] = params["phone"]
   result[:email] = params["email"]
+  result[:insurerIsOwner] = params["insurerIsOwner"]
 
   return result
 end
