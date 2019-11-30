@@ -156,6 +156,7 @@ end
         driver_params['prevLicenseSerial'] = driver['prevLicenseSerial']
         driver_params['prevLicenseNumber'] = driver['prevLicenseNumber']
         driver_params['prevLicenseDate'] = driver['prevLicenseDate']
+        driver_params['exp'] = driver['exp']
         driver_params['agreement_id'] = agreement[:id]
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_12_035808) do
+ActiveRecord::Schema.define(version: 2019_11_30_134854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_11_12_035808) do
     t.date "prevLicenseDate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "exp"
   end
 
   create_table "insurance_companies", force: :cascade do |t|
