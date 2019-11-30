@@ -61,7 +61,7 @@ module SaverHelper
   end
   def self.save_owner(params)
     owner = self.get_owner_or_insurer_model params
-    if params["id"]
+    if params["id"] && params["id"] != 0
         @owner = Owner.find params["id"]
 
         if @owner
@@ -79,7 +79,7 @@ end
 
 def self.save_insurer(params)
   owner = self.get_owner_or_insurer_model params
-    if params["id"]
+    if params["id"] && params["id"] != 0
         @insurer = Insurer.find params["id"]
 
         if @insurer
@@ -111,7 +111,11 @@ def self.save_agreement(aggr, data, drivers)
   agreement[:access_id] = SecureRandom.uuid
   agreement[:access_code] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
 
-  if agreement[:id]
+  if !agreement[:id]  || agreement[:id] == 0
+    agreement[:id] = nil
+  end
+
+  if agreement[:id]  && agreement[:id] != 0
     @agr = Agreement.find agreement[:id]
 
     if @agr
@@ -122,6 +126,8 @@ def self.save_agreement(aggr, data, drivers)
   else
     @agr = Agreement.new agreement
   end
+
+  
 
   @agr.save
 
@@ -135,34 +141,36 @@ end
 
   def self.save_drivers(drivers_list, agreement)
     result = [];
-    drivers_list.each do |driver|
-      driver_params = {}
-      driver_params['lastname'] = driver['lastname']
-      driver_params['firstname'] = driver['firstname']
-      driver_params['middlename'] = driver['middlename']
-      driver_params['birthdate'] = driver['birthdate']
-      driver_params['expdate'] = driver['expdate']
-      driver_params['licenseSerial'] = driver['licenseSerial']
-      driver_params['licenseNumber'] = driver['licenseNumber']
-      driver_params['licenseDate'] = driver['licenseDate']
-      driver_params['licenseForeign'] = driver['licenseForeign ']
-      driver_params['prevLicenseSerial'] = driver['prevLicenseSerial']
-      driver_params['prevLicenseNumber'] = driver['prevLicenseNumber']
-      driver_params['prevLicenseDate'] = driver['prevLicenseDate']
-      driver_params['agreement_id'] = agreement[:id]
+    if drivers_list
+      drivers_list.each do |driver|
+        driver_params = {}
+        driver_params['lastname'] = driver['lastname']
+        driver_params['firstname'] = driver['firstname']
+        driver_params['middlename'] = driver['middlename']
+        driver_params['birthdate'] = driver['birthdate']
+        driver_params['expdate'] = driver['expdate']
+        driver_params['licenseSerial'] = driver['licenseSerial']
+        driver_params['licenseNumber'] = driver['licenseNumber']
+        driver_params['licenseDate'] = driver['licenseDate']
+        driver_params['licenseForeign'] = driver['licenseForeign ']
+        driver_params['prevLicenseSerial'] = driver['prevLicenseSerial']
+        driver_params['prevLicenseNumber'] = driver['prevLicenseNumber']
+        driver_params['prevLicenseDate'] = driver['prevLicenseDate']
+        driver_params['agreement_id'] = agreement[:id]
 
 
-      if driver["id"]
-        _driver = Driver.find(driver["id"])
+        if driver["id"]  && driver["id"] != 0
+          _driver = Driver.find(driver["id"])
+        end
+
+        if _driver
+          _driver.update(driver_params)
+        else
+          _driver = Driver.new(driver_params)
+        end
+        _driver.save
+        result.push _driver
       end
-
-      if _driver
-        _driver.update(driver_params)
-      else
-        _driver = Driver.new(driver_params)
-      end
-      _driver.save
-      result.push _driver
     end
     return result
   end
