@@ -32,4 +32,8 @@ module Helper
     #return 'Token 42f86217e754ff52c35eb5175e36bac5b5c99b07'
   end
 
+  def self.dadata_url_for_city
+    return 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/address'
+  end
+
 end

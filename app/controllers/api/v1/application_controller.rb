@@ -39,6 +39,18 @@ module Api
         render json: JSON.parse(response.body)["suggestions"], status: :ok
       end
 
+      def addr_by_kladr
+        response = RestClient.post Helper.dadata_url_for_city.to_s,
+        {
+          :query => params[:query]
+        }.to_json,
+        {
+            'Authorization':Helper.dadata_token.to_s,
+            'Content-Type':'application/json'
+        }
+        render json: JSON.parse(response.body)["suggestions"], status: :ok
+      end
+
       def addr
         response = RestClient.post Helper.dadata_url.to_s,
         {

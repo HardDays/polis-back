@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       #get 'regions/:regId/:distId', action: :regions, controller: 'application'
 
       get 'regions/kladr', action: :kladr, controller: 'application'
+      get 'addr/kladr', action: :addr_by_kladr, controller: 'application'
       get 'regions/addr', action: :addr, controller: 'application'
       get 'regions/ufms', action: :ufms, controller: 'application'
 
