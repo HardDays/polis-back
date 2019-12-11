@@ -200,7 +200,7 @@ def self.get_car_model(params)
   car_params[:vin] = params["vin"]
   
   car_params[:docType] = params["docType"]
-
+  car_params[:docDate] = params["docDate"]
   car_params[:docSerial] = params["docSerial"]
   car_params[:docNumber] = params["docNumber"]
 
