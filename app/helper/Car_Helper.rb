@@ -6,7 +6,7 @@ module CarHelper
     response = RestClient.get Helper.api_url.to_s, {'Authorization':token, 'Content-Type':'application/json', params:{q:'list_brands'}}
 
     JSON.parse(response.body)['results'].each do |brand|
-      if /$([a-zA-Z]+[\s\-\_]?[a-zA-Z])+^/ === brand || /$(ВАЗ|ЗАЗ|ГАЗ)^/ === brand
+      # if /([a-zA-Z]+[\s\-\_]?[a-zA-Z])+/ === brand || /$ВАЗ|ЗАЗ|ГАЗ^/ === brand
         @brand_m = CarBrand.new(title: brand.to_s)
         if @brand_m.save
           models = RestClient.get Helper.api_url.to_s, {'Authorization':token, 'Content-Type':'application/json', params:{q:'list_models', brand:brand}}
@@ -15,7 +15,7 @@ module CarHelper
             @model_m.save
           end
         end
-      end
+      # end
     end
 
   end
