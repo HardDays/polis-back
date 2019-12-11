@@ -87,6 +87,10 @@ module Api
         render json: JSON.parse(response.body)["suggestions"], status: :ok
       end
 
+      def widget_token
+        render json: Helper.getWidgetToken, status: :ok
+      end
+
       def amo
         render json: AmoHelper.test2(params), status: :ok
       end

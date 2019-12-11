@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
       get 'amo/test', action: :amo, controller: 'application'
 
+      get 'widget/test', action: :widget_token, controller: 'application'
+
     end
   end
 
