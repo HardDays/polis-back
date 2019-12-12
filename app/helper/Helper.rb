@@ -34,18 +34,9 @@ module Helper
         :password => "pH3xkXTp1"
       }
     ]
-    # if DateTime.now.strftime('%s').to_i / 2 == 0
-    #   body[:username] = "paramonov.kirill.alexandrovich@gmail.com"
-    #   body[:password] = "pH3xkXTp1"
-    # else
-    #   body[:username] = "kka@pro-brokers.ru"
-    #   body[:password] = "kka"
-    # end
-
-    # return body
 
       response = RestClient.post self.api_widget_url.to_s+'/users/obtain-token', options[rand(0..3)].to_json, {'Accept':'application/json, text/plain', 'Content-Type':'application/json'}
-      # return response
+      
       return 'Token ' + JSON.parse(response.body)['token']
   end
 
