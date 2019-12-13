@@ -1,0 +1,59 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_type_id: 1
+  car_brand_id: 1
+  car_model_id: 1
+  power: 1
+  vin: MyString
+  year: 1
+  body_number: MyString
+  chassis_number: MyString
+  wight: 1
+  max_wight: 1
+  seats: 1
+  document_type: MyString
+  : 1
+  document_serial: MyString
+  document_number: MyString
+  document_date: 2019-10-14
+  dc: MyString
+  dc_date: 2019-10-14
+  dc_issue_date: 2019-10-14
+  owner_id: 1
+  car_usetype_id: 1
+  registered_abroad: 1
+  registration_way: 1
+  use_trailer: 1
+  prev_policy_serial: MyString
+  prev_policy_number: MyString
+  insurers_id: 1
+
+two:
+  car_type_id: 1
+  car_brand_id: 1
+  car_model_id: 1
+  power: 1
+  vin: MyString
+  year: 1
+  body_number: MyString
+  chassis_number: MyString
+  wight: 1
+  max_wight: 1
+  seats: 1
+  document_type: MyString
+  : 1
+  document_serial: MyString
+  document_number: MyString
+  document_date: 2019-10-14
+  dc: MyString
+  dc_date: 2019-10-14
+  dc_issue_date: 2019-10-14
+  owner_id: 1
+  car_usetype_id: 1
+  registered_abroad: 1
+  registration_way: 1
+  use_trailer: 1
+  prev_policy_serial: MyString
+  prev_policy_number: MyString
+  insurers_id: 1
