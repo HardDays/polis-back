@@ -24,9 +24,9 @@ module CarHelper
       token = Helper.getWidgetToken
       #token = 'Token afdd5a46a8b02eb8242997711a614dec91ea09af'
       response = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/by_number_plate', {'number_plate':params['number_plate'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
-      # if response.status.to_i != 200 && response.status.to_i != 201
-      #  return response
-      # end
+      if response.code.to_i != 200 && response.code.to_i != 201
+       return response
+      end
       #return response.body
 
       result = JSON.parse(response.body)
@@ -34,7 +34,9 @@ module CarHelper
       # return result
       if result['vin_number']
         resp = RestClient.post Helper.api_widget_url.to_s+'/insured_objects/cars/ticket_check', {'ident_type':'VIN', 'ident_number':result['vin_number'].to_s}.to_json, {'Accept':'application/json, text/plain, */*', 'Content-Type':'application/json', 'Authorization':token}
-        result['dc'] = JSON.parse(resp.body)
+        if resp.code.to_i == 200
+          result['dc'] = JSON.parse(resp.body)
+        end
       end
       #return result
       return SaverHelper.save_car_from_numberplate_find(result)
