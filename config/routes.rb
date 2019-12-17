@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post 'calculate/full', action: :full_calc, controller: 'calculation'
       post 'calculate/offer/:sk', action: :get_offer, controller: 'calculation'
       post 'calculate/save', action: :save_agr, controller: 'calculation'
+      post 'calculate/kbm', action: :get_kbm, controller: 'calculation'
       get 'calculate', action: :get_saved_agreement, controller: 'calculation'
 
       get 'pay/link/:eId', action: :pay_link, controller: 'pay'

@@ -18,7 +18,7 @@ module CalculationHelper
     result[:calculations] = JSON.parse(response.body)
 
     
-    result[:data] = SaverHelper.save_full_agreement(params)
+    # result[:data] = SaverHelper.save_full_agreement(params)
 
     return result
   end

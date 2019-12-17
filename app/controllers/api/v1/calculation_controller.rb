@@ -38,6 +38,26 @@ module Api
 
       end
 
+      def get_kbm
+        response = RestClient::Request.execute(method: :post,
+          url:  Helper.api_url.to_s,
+          payload: {
+            :multidrive => 0,
+            :kbmOnly => 1,
+            :drivers => params["drivers"],
+            :owner => {
+              :juridicalPerson => 0
+            }
+          }.to_json,
+          headers: {
+              'Authorization': Helper.getINGURUToken.to_s,
+              'Content-Type':'application/json'
+                 },
+          timeout: 120)
+        render json: response.body , status: :ok
+
+      end
+
       def full_calc
 
         get_insurer
