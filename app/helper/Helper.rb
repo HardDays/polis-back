@@ -11,7 +11,7 @@ module Helper
   end
 
   def self.api_url
-    return 'https://api.inguru.ru/eosago/4.2'
+    return 'https://api.inguru.ru/eosago/4.1'
   end
 
   def self.getWidgetToken
