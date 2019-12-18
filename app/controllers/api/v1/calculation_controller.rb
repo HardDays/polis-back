@@ -1,34 +1,70 @@
 module Api
   module V1
     class CalculationController < ApplicationController
-      #TODO: перепилить
-      #finished
-      def agreement
-        aggr = Agreement.find_by(access_id: params[:access_id], access_code: params[:access_code])
-        if aggr
-          render json: aggr, details: true
-        else
-          render status: :not_found
-        end
+      def get_saved_agreement
+        params.require(:access_code)
+        params.require(:access_id)
+        render json: SaverHelper.get_full_agreement(params) , status: :ok
       end
-      
-      def create_agreement
-        # calculation = InguruHelper.prev_calculate(params)
-        
-        # result = {}
-        # result[:calculations] = calculation
-        # result[:data] = SaverHelper.save_full_agreement(params)
-        
+      def save_agr
         render json: SaverHelper.save_full_agreement(params), status: :ok
       end
 
-      def full_calculate
+      def first_calc
+        render json: CalculationHelper.prev_calculate(params) , status: :ok
+      end
+
+      def get_offer
+        params.require(:sk)
+
+        sk = params[:sk]
+        aggr = params["agreement"]
+        # render json: aggr["vehicle"] , status: :ok
+        body = {};
+        body[:sk] = [sk.to_i]
+        aggr.each do |attr_name, attr_value|
+          body[attr_name] = attr_value
+        end
+        # render json: body , status: :ok
+        response = RestClient::Request.execute(method: :post,
+          url:  Helper.api_url.to_s,
+          payload: body.to_json,
+          headers: {
+              'Authorization': Helper.getINGURUToken.to_s,
+              'Content-Type':'application/json'
+                 },
+          timeout: 120)
+        render json: response.body , status: :ok
+
+      end
+
+      def get_kbm
+        response = RestClient::Request.execute(method: :post,
+          url:  Helper.api_url.to_s,
+          payload: {
+            :multidrive => 0,
+            :kbmOnly => 1,
+            :drivers => params["drivers"],
+            :owner => {
+              :juridicalPerson => 0
+            }
+          }.to_json,
+          headers: {
+              'Authorization': Helper.getINGURUToken.to_s,
+              'Content-Type':'application/json'
+                 },
+          timeout: 120)
+        render json: response.body , status: :ok
+
+      end
+
+      def full_calc
 
         get_insurer
         get_owner
         get_car
 
-        if insurers_params && params[:insurerIsOwner] == 0
+        if insurers_params && params[:insurerIsOwner]==0
           @insurer = SaverHelper.save_insurer(insurers_params, @insurer)
         else
           @insurer = SaverHelper.save_insurer(owners_params, @insurer)
@@ -40,9 +76,9 @@ module Api
         SaverHelper.save_drivers(drivers_params, @car)
 
         if params[:insurerIsOwner].to_i == 1
-          render json: InguruHelper.full_calculate(params) , status: :ok
+          render json: CalculationHelper.full_calculate(params) , status: :ok
         else
-          render json: InguruHelper.full_calculate_ins(params) , status: :ok
+          render json: CalculationHelper.full_calculate_vs_ins(params) , status: :ok
         end
 
       end
