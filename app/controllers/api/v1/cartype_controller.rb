@@ -12,10 +12,10 @@ module Api
       end
 
       private
+
       def set_type
         @model = CarType.find(params[:id])
       end
-
     end
   end
 end
