@@ -223,15 +223,13 @@ module CalculationHelper
   def self.pay_link(params)
 
     query_params = {};
-    query_params["q"] = 'payurl'
-    query_params["eId"] = params[:eId]
+    query_params[:q] = 'payurl'
+    query_params[:eId] = params[:eId]
+    query_params[:failUrl] = params[:failUrl]
+    query_params[:successUrl] = params[:successUrl]
 
-    if params["successUrl"]
-      query_params["successUrl"] = params["successUrl"]
-    end
-
-    if params["failUrl"]
-      query_params["failUrl"] = params["failUrl"]
+    if params["smsCode"]
+      query_params[:smsCode] = params[:smsCode]
     end
     
     response = RestClient.get Helper.api_url.to_s,{'Authorization':Helper.getINGURUToken.to_s, 'Content-Type':'application/json', params:query_params}
