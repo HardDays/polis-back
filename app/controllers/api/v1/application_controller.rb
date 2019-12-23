@@ -91,7 +91,7 @@ module Api
         response = RestClient.post "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio", 
         {
           :query => params[:query]
-        },
+        }.to_json,
         {'Authorization':Helper.dadata_token.to_s, 'Content-Type':'application/json'}
 
         render json: JSON.parse(response.body)['suggestions'], status: :ok
