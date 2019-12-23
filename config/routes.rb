@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       get 'addr/kladr', action: :addr_by_kladr, controller: 'application'
       get 'regions/addr', action: :addr, controller: 'application'
       get 'regions/ufms', action: :ufms, controller: 'application'
+      get 'dadata/fio', action: :fio, controller: 'application'
 
       post 'twilio/verify', action: :verify, controller: 'twilio'
       post 'twilio/check', action: :check, controller: 'twilio'
