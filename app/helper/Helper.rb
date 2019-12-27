@@ -41,7 +41,7 @@ module Helper
   end
 
   def self.api_widget_url
-    return 'https://widget.agentapp.ru/widgets/v1'
+    return 'https://widget.agentapp.ru/v1'
   end
 
   def self.dadata_url
